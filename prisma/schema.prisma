@@ -1,0 +1,120 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      String   @default("admin")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  posts     Post[]
+  orders    Order[]
+  events    Event[]
+}
+
+model Category {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  slug      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  posts     Post[]
+}
+
+model Post {
+  id            String    @id @default(cuid())
+  title         String
+  slug          String    @unique
+  content       String
+  excerpt       String?
+  featuredImage String?
+  published     Boolean   @default(false)
+  authorId      String
+  author        User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  categoryId    String
+  category      Category  @relation(fields: [categoryId], references: [id])
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  publishedAt   DateTime?
+
+  @@index([slug])
+  @@index([categoryId])
+  @@index([published])
+}
+
+model Event {
+  id            String   @id @default(cuid())
+  title         String
+  slug          String   @unique
+  description   String
+  date          DateTime
+  location      String
+  image         String?
+  category      String? // e.g. "Tech", "Music"
+  published     Boolean  @default(false)
+  adminApproved Boolean  @default(false)
+  paymentStatus String   @default("PENDING") // PENDING, PAID
+  creatorId     String?
+  creator       User?    @relation(fields: [creatorId], references: [id])
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  tickets       Ticket[]
+
+  @@index([slug])
+  @@index([date])
+  @@index([creatorId])
+}
+
+model Ticket {
+  id          String  @id @default(cuid())
+  name        String
+  price       Float
+  description String?
+  quantity    Int // Total tickets available
+  available   Int // Tickets remaining
+  eventId     String
+  event       Event   @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  orders      Order[]
+
+  @@index([eventId])
+}
+
+model Order {
+  id            String   @id @default(cuid())
+  userId        String?
+  user          User?    @relation(fields: [userId], references: [id])
+  ticketId      String
+  ticket        Ticket   @relation(fields: [ticketId], references: [id])
+  quantity      Int
+  totalAmount   Float
+  status        String   @default("PENDING") // PENDING, COMPLETED, CANCELLED
+  customerName  String
+  customerEmail String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([userId])
+  @@index([ticketId])
+}
+
+model Advert {
+  id        String   @id @default(cuid())
+  type      String   // "horizontal" or "square"
+  image     String   // Image URL/path
+  link      String?  // Click-through URL
+  alt       String?  // Alt text
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
