@@ -1,6 +1,6 @@
-# Professional Blogging Website
+# Technidy - Professional Tech Blog
 
-A full-featured blogging platform built with Next.js 14, TypeScript, Prisma, and Tailwind CSS.
+A full-featured tech blogging platform built with Next.js 14, TypeScript, Prisma, and Tailwind CSS. Technidy covers daily tech news, AI innovations, events, ticketing, business insights, tutorials, and resources.
 
 ## Features
 
@@ -8,8 +8,10 @@ A full-featured blogging platform built with Next.js 14, TypeScript, Prisma, and
 - **Homepage** with latest blog posts
 - **Category pages** for filtering posts by category
 - **Individual post pages** with SEO optimization
+- **Events & Ticketing** system for tech events
 - **Responsive design** for all devices
 - **Modern UI** with Tailwind CSS
+- **Dynamic advertisements** management
 
 ### Admin Features
 - **Authentication** with NextAuth.js
@@ -17,8 +19,11 @@ A full-featured blogging platform built with Next.js 14, TypeScript, Prisma, and
 - **Rich text editor** with React Quill
 - **Image upload** for featured images
 - **Category management**
+- **Advert management** (header, footer, sidebar)
+- **Event management** with ticketing
+- **User management**
 - **Publish/Draft** status control
-- **Admin dashboard** with post management
+- **Admin dashboard** with comprehensive management tools
 
 ## Tech Stack
 
@@ -75,9 +80,9 @@ Or create a seed script to add a default admin user.
 You can create categories through the admin panel or via Prisma Studio. Common categories:
 - Technology
 - News
-- Entertainment
-- Sports
-- Business
+- Tutorials
+- Innovations
+- Resources
 
 6. Run the development server:
 ```bash
@@ -100,6 +105,11 @@ npm run dev
 │   ├── api/            # API routes
 │   ├── category/       # Category pages
 │   ├── post/           # Post pages
+│   ├── events/         # Events & ticketing
+│   ├── about/          # About page
+│   ├── contact/        # Contact page
+│   ├── privacy/        # Privacy policy
+│   ├── terms/          # Terms of service
 │   └── page.tsx        # Homepage
 ├── components/         # React components
 ├── lib/                # Utility functions
@@ -112,6 +122,9 @@ npm run dev
 - **User**: Admin users
 - **Category**: Blog categories
 - **Post**: Blog posts with content, images, and metadata
+- **Advert**: Advertisement management
+- **Event**: Tech events with ticketing
+- **Ticket**: Event tickets
 
 ## Features in Detail
 
@@ -123,6 +136,21 @@ npm run dev
 - Publish or save as draft
 - Edit existing posts
 - Delete posts
+
+### Events & Ticketing
+- Create and manage tech events
+- Multiple ticket types per event
+- Payment integration
+- Ticket purchase tracking
+- Event approval system
+
+### Advertisement Management
+- Header banner ads
+- Footer banner ads
+- Sidebar square ads
+- Upload custom images
+- Set target URLs
+- Publish/unpublish control
 
 ### Image Upload
 - Images are stored in `public/uploads/`
@@ -150,4 +178,3 @@ npm start
 ## License
 
 MIT
-
