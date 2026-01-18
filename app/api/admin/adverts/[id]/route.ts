@@ -3,9 +3,11 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 
+export const dynamic = 'force-dynamic'
+
 export async function PATCH(
     request: Request,
-    { params }: { params: Promise<{ id: string }> }
+    { params }: { params: { id: string } }
 ) {
     try {
         const session = await getServerSession(authOptions)
@@ -13,7 +15,7 @@ export async function PATCH(
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
         }
 
-        const { id } = await params
+        const { id } = params
         const data = await request.json()
         const advert = await prisma.advert.update({
             where: { id },
@@ -35,7 +37,7 @@ export async function PATCH(
 
 export async function DELETE(
     request: Request,
-    { params }: { params: Promise<{ id: string }> }
+    { params }: { params: { id: string } }
 ) {
     try {
         const session = await getServerSession(authOptions)
@@ -44,7 +46,7 @@ export async function DELETE(
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
         }
 
-        const { id } = await params
+        const { id } = params
         console.log('Deleting advert with ID:', id)
 
         await prisma.advert.delete({
