@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET(request: Request) {
     try {
         const { searchParams } = new URL(request.url)
@@ -28,8 +30,6 @@ export async function GET(request: Request) {
                 date: 'asc',
             },
         })
-
-        return NextResponse.json(events)
 
         return NextResponse.json(events)
     } catch (error: any) {
