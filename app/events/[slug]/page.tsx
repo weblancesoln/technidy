@@ -44,7 +44,7 @@ export default function EventDetailPage({ params }: { params: { slug: string } }
         return (
             <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center px-4 text-center">
                 <h1 className="text-4xl font-black text-gray-900 mb-4">Event Not Found</h1>
-                <p className="text-gray-500 mb-8">The event you're looking for doesn't exist or has been removed.</p>
+                <p className="text-gray-500 mb-8">The event you&apos;re looking for doesn&apos;t exist or has been removed.</p>
                 <Link href="/events" className="px-8 py-3 bg-blue-600 text-white font-black rounded-2xl hover:bg-blue-700 transition shadow-xl shadow-blue-200">
                     Back to Events
                 </Link>

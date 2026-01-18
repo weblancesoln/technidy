@@ -103,12 +103,12 @@ export default function EventPaymentPage({ params }: { params: { id: string } })
                     <div className="space-y-4">
                         <h1 className="text-3xl font-black text-gray-900">Payment Successful!</h1>
                         <p className="text-gray-500">
-                            Thank you for hosting with us! Your event <strong>"{event.title}"</strong> has been received.
+                            Thank you for hosting with us! Your event <strong>&quot;{event.title}&quot;</strong> has been received.
                         </p>
                         <div className="bg-yellow-50 p-6 rounded-3xl text-left border border-yellow-100">
-                            <p className="text-sm font-black text-yellow-800 mb-1">What's Next?</p>
+                            <p className="text-sm font-black text-yellow-800 mb-1">What&apos;s Next?</p>
                             <p className="text-xs text-yellow-700 leading-relaxed">
-                                Our admin team will review your event details. Once approved, it will be visible on the public events page and you'll be able to track ticket sales.
+                                Our admin team will review your event details. Once approved, it will be visible on the public events page and you&apos;ll be able to track ticket sales.
                             </p>
                         </div>
                     </div>
@@ -140,7 +140,7 @@ export default function EventPaymentPage({ params }: { params: { id: string } })
                                     <div>
                                         <p className="text-sm font-black text-blue-900">One-time Creation Fee</p>
                                         <p className="text-xs text-blue-700 opacity-80 mt-1">
-                                            This fee covers event hosting, ticket management, and our platform's administrative services.
+                                            This fee covers event hosting, ticket management, and our platform&apos;s administrative services.
                                         </p>
                                     </div>
                                 </div>

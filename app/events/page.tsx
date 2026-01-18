@@ -189,7 +189,7 @@ export default function EventsPage() {
                     <div className="text-center py-20 bg-white rounded-3xl border-2 border-dashed border-gray-200">
                         <TicketIcon className="h-16 w-16 text-gray-200 mx-auto mb-6" />
                         <h2 className="text-2xl font-black text-gray-800 mb-2">No events found</h2>
-                        <p className="text-gray-500">Try adjusting your search or filters to find what you're looking for.</p>
+                        <p className="text-gray-500">Try adjusting your search or filters to find what you&apos;re looking for.</p>
                     </div>
                 )}
             </main>
