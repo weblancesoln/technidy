@@ -4,6 +4,8 @@ import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { slugify } from '@/lib/utils'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } }
@@ -45,7 +47,7 @@ export async function PUT(
 ) {
   try {
     const session = await getServerSession(authOptions)
-    
+
     if (!session || (session.user as any).role !== 'admin') {
       return NextResponse.json(
         { error: 'Unauthorized' },
@@ -127,7 +129,7 @@ export async function DELETE(
 ) {
   try {
     const session = await getServerSession(authOptions)
-    
+
     if (!session || (session.user as any).role !== 'admin') {
       return NextResponse.json(
         { error: 'Unauthorized' },

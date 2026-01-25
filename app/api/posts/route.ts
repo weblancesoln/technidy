@@ -4,6 +4,8 @@ import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { slugify } from '@/lib/utils'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams
@@ -13,11 +15,11 @@ export async function GET(request: NextRequest) {
     const limit = parseInt(searchParams.get('limit') || '10')
 
     const where: any = {}
-    
+
     if (category) {
       where.category = { slug: category }
     }
-    
+
     if (published !== null) {
       where.published = published === 'true'
     }
@@ -61,7 +63,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions)
-    
+
     if (!session || (session.user as any).role !== 'admin') {
       return NextResponse.json(
         { error: 'Unauthorized' },
@@ -80,7 +82,7 @@ export async function POST(request: NextRequest) {
     }
 
     const slug = slugify(title)
-    
+
     // Check if slug already exists
     const existingPost = await prisma.post.findUnique({
       where: { slug },
