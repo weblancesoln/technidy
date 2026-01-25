@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -18,11 +18,7 @@ export default function CheckoutPage({ params }: { params: { ticketId: string } 
         quantity: 1
     })
 
-    useEffect(() => {
-        fetchTicket()
-    }, [params.ticketId])
-
-    async function fetchTicket() {
+    const fetchTicket = useCallback(async () => {
         try {
             // We can fetch ticket info via a search or a dedicated endpoint. 
             // For now, let's assume we can get it from the event detail if we had the event ID, 
@@ -41,7 +37,11 @@ export default function CheckoutPage({ params }: { params: { ticketId: string } 
         } finally {
             setLoading(false)
         }
-    }
+    }, [params.ticketId])
+
+    useEffect(() => {
+        fetchTicket()
+    }, [fetchTicket])
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault()

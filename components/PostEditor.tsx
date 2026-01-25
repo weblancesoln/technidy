@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import dynamic from 'next/dynamic'
 import 'react-quill/dist/quill.snow.css'
@@ -204,10 +205,11 @@ export default function PostEditor({ categories, post }: PostEditorProps) {
           <div className="space-y-4">
             {featuredImage && (
               <div className="relative w-full h-64 rounded-lg overflow-hidden border border-gray-300">
-                <img
+                <Image
                   src={featuredImage}
                   alt="Featured"
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover"
                 />
                 <button
                   type="button"

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { ShieldCheck, CreditCard, ChevronLeft, CheckCircle2, Copy, Check, Building2 } from 'lucide-react'
 import Link from 'next/link'
@@ -16,11 +16,7 @@ export default function EventPaymentPage({ params }: { params: { id: string } })
     const [copied, setCopied] = useState(false)
     const [copiedBank, setCopiedBank] = useState(false)
 
-    useEffect(() => {
-        fetchEvent()
-    }, [params.id])
-
-    async function fetchEvent() {
+    const fetchEvent = useCallback(async () => {
         try {
             const res = await fetch(`/api/events/${params.id}`)
             const data = await res.json()
@@ -30,7 +26,11 @@ export default function EventPaymentPage({ params }: { params: { id: string } })
         } finally {
             setLoading(false)
         }
-    }
+    }, [params.id])
+
+    useEffect(() => {
+        fetchEvent()
+    }, [fetchEvent])
 
     async function handlePay() {
         setProcessing(true)

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Calendar, MapPin, Ticket as TicketIcon, Clock, Share2, ShieldCheck, ChevronLeft } from 'lucide-react'
@@ -16,11 +16,7 @@ export default function EventDetailPage({ params }: { params: { slug: string } }
         return src.startsWith('/') || src.startsWith('http://') || src.startsWith('https://')
     }
 
-    useEffect(() => {
-        fetchEvent()
-    }, [params.slug])
-
-    async function fetchEvent() {
+    const fetchEvent = useCallback(async () => {
         try {
             const res = await fetch(`/api/events/${params.slug}`)
             const data = await res.json()
@@ -30,7 +26,11 @@ export default function EventDetailPage({ params }: { params: { slug: string } }
         } finally {
             setLoading(false)
         }
-    }
+    }, [params.slug])
+
+    useEffect(() => {
+        fetchEvent()
+    }, [fetchEvent])
 
     if (loading) {
         return (
