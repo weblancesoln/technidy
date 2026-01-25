@@ -7,6 +7,8 @@ import Hero from '@/components/Hero'
 import Advert from '@/components/Advert'
 import Header from '@/components/Header'
 
+export const dynamic = 'force-dynamic'
+
 async function getPosts() {
   const posts = await prisma.post.findMany({
     where: { published: true },
